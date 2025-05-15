@@ -13,16 +13,16 @@ const connectMongoDb = async () => {
   }
 }
 
-const filmSchema = new Schema({
-  title: { type: String, required: true, unique: true },
+const carSchema = new Schema({
+  brand: { type: String, requiered: true },
+  model: { type: String, required: true, unique: true },
   year: { type: Number, requiered: true },
-  rating: { type: Number, requiered: true },
-  gender: {}
+  plate: { type: String, requiered: true, unique: true }
 })
 
-const Film = model("film", filmSchema)
+const car = model("car", carSchema)
 
-const addNewFIlm = async () => {
+const addNewCar = async () => {
   try {
 
   } catch (error) {
@@ -30,7 +30,7 @@ const addNewFIlm = async () => {
   }
 }
 
-const getFilms = async () => {
+const getCars = async () => {
   try {
 
   } catch (error) {
@@ -38,7 +38,7 @@ const getFilms = async () => {
   }
 }
 
-const getFilm = async (id: string) => {
+const getUniqueCar = async (id: string) => {
   try {
 
   } catch (error) {
@@ -47,7 +47,7 @@ const getFilm = async (id: string) => {
 }
 
 
-const updateFilm = async (id: string) => {
+const updateCar = async (id: string) => {
   try {
 
   } catch (error) {
