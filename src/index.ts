@@ -22,4 +22,45 @@ const filmSchema = new Schema({
 
 const Film = model("film", filmSchema)
 
+const addNewFIlm = async () => {
+  try {
+
+  } catch (error) {
+
+  }
+}
+
+const getFilms = async () => {
+  try {
+
+  } catch (error) {
+
+  }
+}
+
+const getFilm = async (id: string) => {
+  try {
+
+  } catch (error) {
+
+  }
+}
+
+
+const updateFilm = async (id: string) => {
+  try {
+
+  } catch (error) {
+
+  }
+}
+
+const deleteFilm = async (id: string) => {
+  try {
+
+  } catch (error) {
+
+  }
+}
+
 connectMongoDb()
