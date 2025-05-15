@@ -13,3 +13,13 @@ const connectMongoDb = async () => {
   }
 }
 
+const filmSchema = new Schema({
+  title: { type: String, required: true, unique: true },
+  year: { type: Number, requiered: true },
+  rating: { type: Number, requiered: true },
+  gender: {}
+})
+
+const Film = model("film", filmSchema)
+
+connectMongoDb()
