@@ -105,10 +105,27 @@ const updateCar = async (id: string) => {
   }
 }
 
-const deleteFilm = async (id: string) => {
+const deleteCar = async (id: string) => {
   try {
+    const removeCar = await Car.findByIdAndDelete(id)
 
+    if (!removeCar) {
+      return {
+        success: false,
+        message: "Error while finding car by id"
+      }
+    }
+
+    return {
+      success: true,
+      data: removeCar,
+      message: "car was removed correctly"
+    }
   } catch (error) {
+    return {
+      success: false,
+      error: "Error while finding car by id"
+    }
 
   }
 }
@@ -121,9 +138,11 @@ const main = async () => {
 
   //const cars = await getCars()
 
-  const findCar = await getUniqueCar("682682d24051b0a8f56ea737")
+  //const findCar = await getUniqueCar("682682d24051b0a8f56ea737")
 
-  console.log(findCar)
+  const removeCar = await deleteCar("682682d24051b0a8f56ea737")
+
+  console.log(removeCar)
 
 }
 
