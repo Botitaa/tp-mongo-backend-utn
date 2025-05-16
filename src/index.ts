@@ -46,7 +46,10 @@ const addNewCar = async (newCar: ICar) => {
       message: "Car was added succesfully"
     }
   } catch (error: any) {
-    return { success: false, error: error.message }
+    return {
+      success: false,
+      error: error.message
+    }
 
   }
 }
@@ -87,10 +90,10 @@ const getUniqueCar = async (id: string) => {
       }
     }
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
-      error: "Error while finding car by id"
+      error: error.message
     }
 
   }
@@ -115,10 +118,10 @@ const updateCar = async (id: string, newData: Partial<ICar>) => {
       message: "Car update was succesfull"
     }
 
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
-      error: "Error while finding car by id"
+      error: error.message
     }
 
   }
@@ -140,10 +143,10 @@ const deleteCar = async (id: string) => {
       data: removeCar,
       message: "car was removed correctly"
     }
-  } catch (error) {
+  } catch (error: any) {
     return {
       success: false,
-      error: "Error while finding car by id"
+      error: error.message
     }
 
   }
