@@ -54,7 +54,17 @@ const addNewCar = async (newCar: ICar) => {
 const getCars = async () => {
   try {
 
-  } catch (error) {
+    const cars = await Car.find()
+    return {
+      success: true,
+      data: cars,
+      message: "cars where recovered correctly"
+    }
+  } catch (error: any) {
+    return {
+      success: false,
+      error: error.message
+    }
 
   }
 }
@@ -88,9 +98,11 @@ const deleteFilm = async (id: string) => {
 const main = async () => {
   await connectMongoDb()
 
-  const savedNewCar = await addNewCar({ brand: "Toyota", model: "Camry v6", year: 2012, plate: "jkl-891" })
+  //const savedNewCar = await addNewCar({ brand: "Toyota", model: "Camry v6", year: 2012, plate: "jkl-891" })
 
-  console.log(savedNewCar)
+  const cars = await getCars()
+
+  console.log(cars)
 
 }
 
