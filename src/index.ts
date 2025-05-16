@@ -13,19 +13,40 @@ const connectMongoDb = async () => {
   }
 }
 
+interface ICar {
+  brand: string
+  model: string
+  year: number
+  plate: string
+}
+
 const carSchema = new Schema({
-  brand: { type: String, requiered: true },
+  brand: { type: String, required: true },
   model: { type: String, required: true, unique: true },
-  year: { type: Number, requiered: true },
-  plate: { type: String, requiered: true, unique: true }
+  year: { type: Number, required: true },
+  plate: { type: String, required: true, unique: true }
+}, {
+  versionKey: false
 })
 
-const car = model("car", carSchema)
+const Car = model("car", carSchema)
 
-const addNewCar = async () => {
+const addNewCar = async (newCar: ICar) => {
   try {
+    const { brand, model, year, plate } = newCar
+    if (!brand || !model || !year || !plate) {
+      return { success: false, error: "Invalid data" }
+    }
 
-  } catch (error) {
+    const newFileToDb = new Car({ brand, model, year, plate })
+    await newFileToDb.save()
+    return {
+      success: true,
+      data: newFileToDb,
+      message: "Car was added succesfully"
+    }
+  } catch (error: any) {
+    return { success: false, error: error.message }
 
   }
 }
@@ -63,4 +84,14 @@ const deleteFilm = async (id: string) => {
   }
 }
 
-connectMongoDb()
+
+const main = async () => {
+  await connectMongoDb()
+
+  const savedNewCar = await addNewCar({ brand: "Toyota", model: "Camry v6", year: 2012, plate: "jkl-891" })
+
+  console.log(savedNewCar)
+
+}
+
+main()
