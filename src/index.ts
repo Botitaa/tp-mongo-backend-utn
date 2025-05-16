@@ -97,10 +97,29 @@ const getUniqueCar = async (id: string) => {
 }
 
 
-const updateCar = async (id: string) => {
+const updateCar = async (id: string, newData: Partial<ICar>) => {
   try {
 
+    const updatedCar = await Car.findByIdAndUpdate(id, newData, { new: true })
+
+    if (!updatedCar) {
+      return {
+        success: false,
+        message: "Error while updating, ID not found"
+      }
+    }
+
+    return {
+      success: true,
+      data: updatedCar,
+      message: "Car update was succesfull"
+    }
+
   } catch (error) {
+    return {
+      success: false,
+      error: "Error while finding car by id"
+    }
 
   }
 }
@@ -134,15 +153,17 @@ const deleteCar = async (id: string) => {
 const main = async () => {
   await connectMongoDb()
 
-  //const savedNewCar = await addNewCar({ brand: "Toyota", model: "Camry v6", year: 2012, plate: "jkl-891" })
+  const savedNewCar = await addNewCar({ brand: "Toyota", model: "Camry v6", year: 2012, plate: "jkl-891" })
 
-  //const cars = await getCars()
+  const cars = await getCars()
 
-  //const findCar = await getUniqueCar("682682d24051b0a8f56ea737")
+  const findCar = await getUniqueCar("682796a0ac2aefdeba3ab6a4")
 
-  const removeCar = await deleteCar("682682d24051b0a8f56ea737")
+  const uCar = await updateCar("682796a0ac2aefdeba3ab6a4", { model: "hilux 4x4" })
 
-  console.log(removeCar)
+  const removeCar = await deleteCar("68278b4d7d4a5003042abaea")
+
+  console.log()
 
 }
 
