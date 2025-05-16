@@ -72,7 +72,26 @@ const getCars = async () => {
 const getUniqueCar = async (id: string) => {
   try {
 
+    const foundCar = await Car.findById(id)
+
+    if (!foundCar) {
+      return {
+        success: false,
+        message: "Error while finding car by id"
+      }
+    } else {
+      return {
+        success: true,
+        data: foundCar,
+        message: "car was find correctly"
+      }
+    }
+
   } catch (error) {
+    return {
+      success: false,
+      error: "Error while finding car by id"
+    }
 
   }
 }
@@ -100,9 +119,11 @@ const main = async () => {
 
   //const savedNewCar = await addNewCar({ brand: "Toyota", model: "Camry v6", year: 2012, plate: "jkl-891" })
 
-  const cars = await getCars()
+  //const cars = await getCars()
 
-  console.log(cars)
+  const findCar = await getUniqueCar("682682d24051b0a8f56ea737")
+
+  console.log(findCar)
 
 }
 
